@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Avalanche Course/1 - Blockchain Fundamentals.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1 - Blockchain Fundamentals"
+              "title": "README"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Avalanche Course/1 - Blockchain Fundamentals.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Riferimenti a 1 - Blockchain Fundamentals"
+              "title": "Riferimenti a README"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Avalanche Course/1 - Blockchain Fundamentals.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Collegamenti in uscita da 1 - Blockchain Fundamentals"
+              "title": "Collegamenti in uscita da README"
             }
           },
           {
@@ -142,17 +142,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Avalanche Course/1 - Blockchain Fundamentals.md",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Struttura di 1 - Blockchain Fundamentals"
+              "title": "Struttura di README"
+            }
+          },
+          {
+            "id": "83576e382da06172",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "b69bffa3518a8cfc",
@@ -189,10 +199,10 @@
   },
   "active": "15067aa38e7d7854",
   "lastOpenFiles": [
+    "Avalanche Course/1 - Blockchain Fundamentals.md",
     "prova.txt~",
     "prova.txt",
     "README.md",
-    "Avalanche Course",
-    "Avalanche Course/1 - Blockchain Fundamentals.md"
+    "Avalanche Course"
   ]
 }
