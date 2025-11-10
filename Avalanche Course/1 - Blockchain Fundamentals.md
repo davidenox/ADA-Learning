@@ -178,3 +178,319 @@ Diversi meccanismi di consenso utilizzano approcci dievrsi, ma generalmente segu
 6. **Blockchain Extension**: Una volta accettato, il blocco viene aggiunto alla blockchain ed il suo ordine di transazione diventa permanente.
 7. **Aggiornamento di stato**: Tutti i nodi aggiornano la loro copia locale dello stato blockchain in base alle transazioni appena confermate.
 
+### Consenso Vs Ordine di transazione
+
+- **Meccanismo di consenso**: Protocollo complessiva che abilita l'accordo distribuito
+- **Ordine di Transazione**: Risultato specifico ottenuto dal consenso, determina l'ordine in cui vengono eseguite le transazioni.
+Il meccanismo di consenso è lo strumento, e l'ordine di transazione è uno degli obiettivi primari che esso raggiunge. 
+I meccanismi di consenso riescono anche a:
+- Determinare chi può aggiungere nuovi blocchi alla catena;
+- Impedire ad attori maligni di riscrivere la storia;
+- Assicurarsi che la rete rimanga operativa anche quando alcuni nodi falliscono o agiscono in modo errato;
+- Distribuire il potere decisionale attraverso la rete.
+
+#### Il consenso decentralizzato è impegnativo
+
+Raggiungere il consenso in una rete decentralizzata è difficile poiché:
+
+1. **Nessuna autorità centrale** fidato per prendere decisioni definitive;
+2. **Ritardi di rete** derivati dal tempo tecnico di trasmettere informazioni, potrebbero far vedere ai nodi le transazioni in ordini diversi;
+3. **Attori malevoli** possono essere dannosi e cercare di interrompere il consenso o manipolare l'ordine di transazione per il loro beneficio;
+4. **Asincronia**, per la quale la rete non opera in perfetta sincronizzazione
+
+## Consenso a catena lunga
+
+La **Longest Chain Rule** (*regola*) è un principio fondamentale utilizzato in molte reti blockchain per risolvere i conflitti e mantenere un unico Ledger unificato. È il meccanismo che assicura che tutti i nodi alla fine siano d'accordo su quale versione della blockchain è quella "corretta", sia che la rete utilizzi PoW, PoS o altri meccanismi.
+
+### Catene Concorrenti
+
+In una rete distribuita in cui più produttori di blocchi lavorano contemporaneamente, è possibile per due validatori proporre blocchi validi quasi allo stesso tempo. Quando questo accade:
+
+- Entrambi i validatori trasmettono i loro blocchi alla rete;
+- Nodi diversi potrebbero ricevere prima blocchi diversi;
+- La blockchain esegue una "fork" temporaneamente in due versioni concorrenti;
+- Ogni versione è valida da sola, ma la rete deve sceglierne una.
+
+Senza una regola chiara per risolvere la situazione, la rete potrebbe dividersi in modo permanente in diverse catene, distruggendo il consenso che rende la blockchain preziosa.
+
+>[!important] Longest Chain Rule
+>Quando esistono più versioni valide della blockchain, i nodi dovrebbero accettare la catena con il peso accumulato maggiore come catena autorevole.
+
+"Più lungo" non significa necessariamente il maggior numero di blocchi, significa che la catena rappresenta il maggior peso cumulativo secondo le regole del protocollo. La metrica di peso specifica varia in base al meccanismo di consenso, ma il principio rimane lo stesso.
+
+### Funzionamento
+
+**Fase 1: La fork**
+
+1. Il blocco 100 è l'ultimo blocco confermato
+2. Validator A propone Block101A nello stesso momento in cui Validator B propone Block101B
+3. Entrambi i blocchi sono validi e correttamente riferiti al blocco 100
+4. A trasmette 101A, B trasmette 101B
+5. I nodi più vicin ad A aggiungono 101A alla loro catena, i nodi più vicini a B aggiungono 101B
+6. La rete ora ha *due catene concorrenti*.
+
+**Fase 2: La gara**
+
+Entrambe le catene continuano:
+
+- Alcuni validatori si basano sulla parte superiore del blocco 101A, altri sul 101B
+- Ogni catena cresce in modo indipendente
+- Nessuna delle due è "sbagliata", secondo le regole del protocollo sono entrambe valide.
+
+**Fase 3: Risoluzione**
+
+Alla fine:
+
+- Un validatore basato sul blocco 101A propone il blocco 102A.
+- Ora la catena che termina con il blocco 102A è più lunga (ha un peso cumulativo maggiore).
+- I nodi che seguono la catena 101B vedono la catena più lunga
+- In base alla regola della catena più lunga, passano alla catena più lunga
+- Il blocco 101B è “orfano”: è valido ma non fa più parte della catena principale
+- Le transazioni nel blocco 101B tornano al mempool per essere incluse nei blocchi futuri
+
+**Fase 4: Convergenza**
+
+- Tutti i nodi ora concordano sulla catena $100\rightarrow101A\rightarrow102A$.
+- La rete si ri-converge su una singola versione
+- L'operazione normale continua.
+
+#### Perché funziona
+
+- Presupposto di maggioranza **onesta**;
+- Meccanismo di **auto-rinforzo**;
+- **Incentivi economici**.
+
+### Implicazioni per la finalità delle transazioni
+
+#### Conferme
+
+Il *conteggio* delle **conferme** di una transazione è il numero di blocchi aggiunti dopo il blocco contenente la transazione:
+
+- **0 Conferme**: La transazione è nel `mempool` ma non ancora in un blocco ( *non confermata* )
+- **1 Conferma**: La transazione è nell'ultimo blocco
+- **2 Conferme**: Un blocco è stato aggiunto dopo il ramo contenente la transazione
+- **Conferme multiple**: Più conferme si ottengono più è sicura la transazione
+
+Più conferme ha una transazione, più è profonda nella blockchain:
+
+- Per invertire una transazione con 1 conferma, un utente malintenzionato deve produrre 2 blocchi più velocemente della rete onesta
+- Per invertire una transazione con 6 conferme, un utente malintenzionato deve produrre 7 blocchi più velocemente della rete onesta
+- Questo diventa *esponenzialmente* più difficile con ogni conferma aggiuntiva
+
+**Finalità** probabilistica: Nei sistemi che utilizzano la regola della catena più lunga, la finalità non è mai assoluta al 100%: c'è sempre una possibilità teorica di inversione. Tuttavia, questa probabilità diventa trascurabilmente piccola dopo diverse conferme.
+
+### Quando la LCR può essere attaccata
+
+Se un utente malintenzionato controlla più del 50% della potenza di convalida della rete:
+
+1. **Possono creare una catena privata:** produrre blocchi in segreto senza trasmetterli
+2. **Superare la** catena **onesta:** poiché controllano la maggioranza, la loro catena segreta cresce più velocemente
+3. **Rilasciare la catena più** lunga: trasmettere improvvisamente la loro catena, che ora è più lunga
+4. **Interruttori di rete** : i nodi seguono la regola della catena più lunga e passano alla versione dell'attaccante
+5. **Transazioni invertite** : le transazioni nella catena onesta sono invertite
+
+*Perché Questo Raramente Accade* :
+
+- L'acquisizione del 51% della potenza di convalida è *estremamente costoso* (miliardi di dollari per le principali reti)
+- L'attacco avrebbe sbalzato il valore della criptovaluta, *distruggendo l'investimento* dell'aggressore
+- L'attacco è *rilevabile* e la comunità può rispondere (fork a una nuova catena, cambiare algoritmo di consenso).
+
+### Reorgs profondi
+
+Una **profonda riorganizzazione** (reorg) si verifica quando una catena lunga viene sostituita da una catena ancora più lunga:
+
+- **Reorgs poco profonde** (1-2 blocchi): comune e atteso, avvengono naturalmente a causa dei ritardi della rete
+- **Reorgs profondi** (6+ blocchi): estremamente raro e di solito indicano un attacco o un problema di rete principale
+- **Protezione** : L'attesa di ulteriori conferme protegge da tutti gli aggressori tranne quelli più dotati di risorse
+
+## Takeaway chiave
+
+- La regola della catena più lunga risolve le fork temporanee facendo accettare ai nodi la catena con il peso più accumulato
+- Assicura che la rete confluisca su un'unica versione coerente della cronologia delle transazioni
+- La finalità delle transazioni è *probabilistica*: più conferme significano una sicurezza esponenzialmente più elevata
+- La regola funziona perché i validatori onesti controllano la maggior parte del potere di convalida e hanno incentivi per seguirlo
+- Gli attacchi del 51% sono teoricamente possibili ma economicamente impraticabili per le grandi reti decentralizzate
+
+>[!important] La regola della catena più lunga è una pietra angolare di molti meccanismi di consenso blockchain, trasformando un sistema distribuito caotico in un Ledger ordinato e sincronizzato di cui tutti i partecipanti possono fidarsi. 
+>È una soluzione meravigliosamente semplice a un problema complesso: lasciare che la rete raggiunga un accordo attraverso una metrica chiara e oggettiva piuttosto che richiedere un coordinamento esplicito.
+
+## Ciclo di vita delle transazioni
+
+Comprendere il ciclo di vita completo di una transazione blockchain aiuta a capire come i sistemi decentralizzati elaborano i pagamenti e mantengono la sicurezza.
+
+### Creazione
+
+Una transazione inizia quando un utente decide di trasferire le risorse. Ciò comporta la specificazione di diverse info chiave:
+
+- **Indirizzo del mittente** derivato dalla chiave pubblica del mittente
+- **Indirizzo del destinatario** dove verranno inviati i beni
+- **Importo** in criptovaluta o token
+- **Commissione di transazione** offerto a miner/validator per includere la transazione in un blocco
+- **Nonce** numero di sequenza che impedisce l'elaborazione multipla della stessa transazione
+- **Dati aggiuntivi** quali campi opzionali per interazioni o note di smart contract
+
+### Firma
+
+Una volta creata la transazione, deve essere firmata crittograficamente per dimostrare l'autorizzazione:
+
+**Il processo di firma** :
+
+1. I dati della transazione vengono disattivati per creare un'impronta digitale unica della transazione
+2. Questo hash è crittografato utilizzando la **chiave privata** del mittente, creando una firma digitale
+3. La firma è allegata alla transazione insieme alla chiave pubblica del mittente
+4. Il pacchetto combinato (transazione + firma + chiave pubblica) è ora pronto per la trasmissione
+
+### Trasmissione
+
+Dopo la firma, la transazione viene trasmessa alla rete peer-to-peer:
+
+**Come funziona la radiodiffusione** :
+
+1. Il portafoglio invia la transazione firmata a uno o più nodi a cui è collegato
+2. Ogni nodo che riceve la transazione esegue la convalida di base
+3. Se valido, il nodo inoltra la transazione ai suoi peer node
+4. Questo processo continua fino a quando la transazione si propaga in tutta la rete
+5. In pochi secondi, la maggior parte dei nodi ha ricevuto la transazione
+
+**Topologia di rete** : Le reti blockchain utilizzano un protocollo di **gossip peer-to-peer** (*P2P*) in cui ogni nodo si collega a più altri nodi. Quando un nodo riceve una nuova transazione, la condivide con i suoi vicini, che la condividono con i loro vicini, creando una propagazione esponenziale.
+
+**Cosa ottiene la trasmissione** :
+
+- I dati completi delle transazioni
+- La firma digitale
+- La chiave pubblica del mittente
+
+### Verifica
+
+Prima di accettare una transazione, i nodi eseguono più controlli:
+
+**Controlli di convalida** :
+
+1. **Verifica della firma** :
+	
+    - Utilizzare la chiave pubblica fornita per verificare la firma
+    - Conferma che la transazione è stata firmata dal proprietario dell'indirizzo del mittente
+    - Rifiutare se la firma non è valida o non corrisponde alla chiave pubblica
+	
+2. **Controllo dell'equilibrio** :
+    
+    - Interroga lo stato blockchain attuale per controllare l'equilibrio del mittente
+    - Assicurarsi che il mittente abbia abbastanza attività per coprire sia l'importo del trasferimento che la commissione di transazione
+    - Rifiutare se insufficiente equilibrio
+	
+3. **Nonce Verification** (sistemi basati su account):
+    
+    - Verificare che la transazione nonce corrisponda al numero di sequenza previsto
+    - Impedisce gli attacchi di replay e garantisce che le transazioni vengano elaborate in ordine
+    - Rifiutare se nonce non è corretto
+	
+4. **Convalida del formato** :
+    
+    - Verificare la transazione segue la corretta struttura dei dati
+    - Verifica che gli indirizzi siano validi
+    - Assicurarsi che la transazione non sia malformata
+	
+5. **Prevenzione a doppia spesa** :
+    
+    - Verificare che lo stesso input non sia già stato speso in un'altra transazione (sistemi UTXO come Bitcoin)
+    - Confronta con le transazioni pendenti nel mempool
+
+**Validazione a due fasi** :
+
+- **Validazione rapida:** i nodi fanno controlli leggeri quando ricevono una transazione tramite trasmissione
+- **Validazione completa** : i minatori/convalidatori effettuano controlli completi prima di includerlo in un blocco
+
+**Cosa succede se la verifica Fallisce** :
+
+- Il nodo rifiuta la transazione e non la inoltra ai pari
+- La transazione muore e non entra nel mempool
+- Il portafoglio del mittente potrebbe ricevere un messaggio di errore
+- Il mittente deve risolvere il problema e creare una nuova transazione
+
+### Mempool
+
+Dopo la verifica, le transazioni valide attendono in un'area di detenzione temporanea:
+
+**Che cosa è il Mempool** :
+
+- Abbreviazione di *memory pool* - una raccolta di transazioni non confermate memorizzate nella RAM di ogni nodo
+- Ogni nodo mantiene il proprio mempool (potrebbe differire leggermente a causa dei tempi di propagazione della rete)
+- Le transazioni attendono qui fino a quando un minatore o un validatore le include in un blocco
+
+**Ordine di transazione in Mempool** : Le transazioni sono tipicamente prioritarie:
+
+- **Livello di commissione** : le tariffe più elevate hanno la priorità (particolarmente importante durante la congestione della rete)
+- **Tempo ricevuto** : Le transazioni più vecchie possono ottenere la preferenza tra le transazioni con la stessa commissione
+- **Dipendenze** : Alcune transazioni devono attendere che altre siano confermate prima
+
+**Dinamica di Mempool** :
+
+- Le dimensioni fluttuano in base all'attività di rete
+- Durante l'alta congestione, i mempool crescono transazioni grandi e a basso costo possono attendere ore o giorni
+- Le transazioni possono essere sfrattate se il mempool diventa troppo pieno (le transazioni a commissione più bassa vengono rimosse prima)
+- Gli utenti possono spesso sostituire le transazioni in sospeso ripresentando commissioni più elevate (Sostituisci-per-Commissione)
+
+## Finalizzazione
+
+La fase finale è quando la transazione diventa permanentemente parte della blockchain:
+
+**Conteggio di conferma** :
+
+- **1 conferma** : la transazione è nel blocco più recente
+- **2 conferme** : Un blocco aggiuntivo è stato aggiunto dopo il blocco contenente la transazione
+- **6 conferme** : Sei blocchi di profondità (generalmente considerati sicuri in Bitcoin)
+- **12+ conferme** : Molto sicuro, inversione estremamente improbabile
+
+**Perché le conferme multiple** contano:
+
+- Più una transazione è più profonda nella blockchain, più è difficile invertire
+- Per invertire una transazione con 6 conferme, un utente malintenzionato dovrebbe ricordare 6 blocchi più velocemente della rete onesta
+- Questo diventa esponenzialmente più difficile e costoso con ogni conferma
+
+**Tipi di finalità** :
+
+- **Finalità probabilistica** (PoW, sistemi a catena più lunga):
+    
+    - Mai 100% finale, ma probabilità di inversione si avvicina zero
+    - Ogni blocco aggiuntivo rende più difficile l'inversione in modo esponenziale
+    - Standard in Bitcoin, Ethereum (pre-merge) e sistemi simili
+	
+- **Finalità assoluta** (Alcuni sistemi PoS):
+    
+    - Una volta finalizzate, le transazioni sono matematicamente impossibili da invertire
+    - Utilizzato in sistemi con gadget di finalità o consenso BFT
+    - Fornisce una più rapida certezza economica, ma può sacrificare un certo decentramento
+
+**Aggiornamento dello Stato** : Una volta confermati, gli effetti della transazione si riflettono nello stato blockchain:
+
+- Il saldo del mittente diminuisce dell'importo più la commissione
+- Il saldo del destinatario aumenta dell'importo
+- Il nonce viene incrementato
+- Lo stato del contratto intelligente può essere aggiornato (se applicabile)
+
+### Riepilogo
+
+```pseudo
+1. CREATION
+   User creates transaction
+   ↓
+2. SIGNING
+   Wallet signs with private key
+   ↓
+3. BROADCASTING
+   Propagates across P2P network
+   ↓
+4. VERIFICATION
+   Nodes validate signature, balance, format
+   ↓
+5. MEMPOOL
+   Waits in memory pool
+   ↓
+6. CONSENSUS
+   Included in block by validator
+   ↓
+7. FINALIZATION
+   Gains confirmations, becomes irreversible
+```
+
+# Protezione dalla Sybil
