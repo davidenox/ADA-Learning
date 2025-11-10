@@ -494,3 +494,21 @@ La fase finale è quando la transazione diventa permanentemente parte della bloc
 ```
 
 # Protezione dalla Sybil
+
+>[!info] Attacco Sybil
+>Come impedire ad un singolo attore malevolo di creare migliaia di identità false per manipolare un sistema?
+
+Un attacco **Sybil** si verifica quando una singola entità crea molteplici identità false (nodi sybil) per ottenere un'influenza o un controllo sproporzionato su una rete.
+
+In una rete decentralizata il potere decisionale dovrebbe essere distribuito tra molti partecipanti indipendenti. Ma se un'entità può impersonificare il maggior numero di partecipanti, può:
+
+1. **Manipolare il consenso** : controllare quali transazioni sono incluse nei blocchi o influenzare l'ordine delle transazioni
+2. **Lanciare 51% Attacchi** : Ottieni il controllo della maggioranza per riscrivere la storia
+3. **Censurare le transazioni** : impedire l'elaborazione di utenti specifici o tipi di transazioni
+4. **Corrompere i voti** : Nei sistemi di governance, votare più volte sulle modifiche del protocollo
+5. **Drenare risorse** : Riempire di Spam la rete o monopolizzare le risorse scarse
+
+Il problema fondamentale è che in una rete veramente aperta e senza permesso, la creazione di una nuova identità è essenzialmente gratuita: puoi generare una nuova coppia di chiavi pubbliche / private istantaneamente senza alcun costo.
+
+## Meccanismi di difesa
+
