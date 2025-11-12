@@ -512,3 +512,208 @@ Il problema fondamentale è che in una rete veramente aperta e senza permesso, l
 
 ## Meccanismi di difesa
 
+Si tratta di strategie progettare per rendere estremamente costoso o impraticabile per un attaccante creare identità multiple.
+
+### Costo di creazione di un'identità
+
+L'approccio comune è quello di *attribuire un costo reale* a ciascuna identità o voto nel sistema, per il quale se creare ogni identità richiede una spesa, un attaccante non può creare identità illimitate senza disporre di risorse illimitate.
+
+## Consenso vs. Sybil Defense
+
+È fondamentale porre una distinzione di questi due obiettivi della blockchain, i quali sono spesso confusi perché gli stessi meccanismi servono ad entrambi gli scopi:
+
+- La domanda a cui rispondono i meccanismi di consenso è : "*Qual è lo stato corretto della blockchain su cui siamo tutti d'accordo?*"
+- La domanda a cui rispondono i meccanismi di difesa dalla Sybil è : "*Come facciamo a garantire che ogni identità nella rete rappresenti un'entità veramente indipendente?*"
+
+## Esempio: Bitcoin
+
+Bitcoin utilizza la Proof of Work (*PoW*):
+**Ruolo del consenso**:
+
+- I miner competono per trovare blocchi validi;
+- La rete segue la catena più lunga valida;
+- Questo assicura che tutti i nodi siano d'accordo sulla cronologia delle transazioni.
+
+**Ruolo della Sybil Defense**:
+
+- Creare 100 identità false di miner non ti avvantaggia;
+- Ciò che conta è il potere computazionale, non il numero di identità;
+- Per controllare la rete è necessario il 51% del tasso di hash totale (potenza di calcolo), che richiede un massiccio investimento in hardware ed elettricità;
+- Questo rende gli attacchi Sybil proibitivamente costosi.
+
+# Smart Contract
+
+I **Contratti Intelligenti** sono programmi di autoesecuzione che funzionano con la blockchain, applicando automaticamente accordi senza intermediari.
+
+Nello specifico, uno Smart Contract è un programma memorizzato su una blockchain che viene eseguito automaticamente qunado vengono soddisfatte delle condizioni predeterminate, come se fosse un accordo digitale scritto in codice, in cui la blockchain applica automaticamente i termini senza richiedere fiducia in nessuna persona o istituzione.
+
+I contratti intelligenti sono distribuiti su piattaforme blockchain che supportano la logica programmabile, con Ethereum (ETH) che è l'esempio più noto e Avalanche (AVAX) quello preso in esame.
+
+## Processo di base
+
+1. **Scrittura del Codice** : Uno sviluppatore scrive uno smart contract in un linguaggio di programmazione. Il contratto definisce:
+    
+    - Le condizioni che devono essere soddisfatte;
+    - Le azioni da intraprendere quando le condizioni sono soddisfatte;
+    - I dati che il contratto memorizza e gestisce.
+	
+2. **Distribuzione** sulla Blockchain: il contratto compilato viene distribuito alla blockchain inviando una transazione speciale. Una volta schierato:
+    
+    - Il contratto ottiene un indirizzo univoco sulla blockchain;
+    - Il codice diventa permanente e immutabile;
+    - Chiunque può interagire con il contratto al suo indirizzo.
+	
+3. **Interazione con il Contratto** : Gli utenti inviano transazioni all'indirizzo del contratto per:
+    
+    - Richiamare le funzioni definite nel contratto;
+    - Inviare criptovaluta o token al contratto;
+    - Leggere i dati memorizzati nel contratto;
+    - Attivare i comportamenti automatici del contratto.
+	
+4. **Esecuzione automatica:** quando qualcuno interagisce con il contratto:
+    
+    - Ogni nodo della rete esegue il codice del contratto;
+    - La logica del contratto determina ciò che accade (trasferimento di fondi, aggiornamento di dati, ecc.)
+    - Tutti i nodi raggiungono il consenso sull'esito;
+    - La blockchain registra i cambiamenti dello stato.
+
+### Caratteristiche chiave
+
+- **Deterministico**: Dati gli stessi input e lo stato blockchain, il contratto produce sempre gli stessi output. Non c'è casualità o influenza esterna.
+- **Autonomo** : Una volta rilasciato, il contratto funziona esattamente come programmato senza l'intervento umano. Nessuno può fermarlo o cambiare il modo in cui si comporta.
+- **Trasparente** : Il codice del contratto e il suo stato attuale sono visibili a tutti sulla blockchain. Chiunque può verificare ciò che fa e verificarne il comportamento.
+- **Immutabile**: Dopo la distribuzione, il codice del contratto non può essere modificato. Questo assicura che le regole non possono essere alterate dopo che le persone iniziano a usarlo.
+- **Trustless** : Gli utenti non hanno bisogno di fidarsi del creatore del contratto o di terze parti: devono solo fidarsi del fatto che il codice fa quello che dice (che possono verificare) e che la blockchain lo eseguirà correttamente.
+
+## Applicazioni del mondo realeù
+
+I contratti intelligenti consentono un vasto ecosistema di applicazioni decentralizzate (dApp) in molti domini:
+
+### Finanza Decentralizzata (DeFi)
+
+DeFi utilizza contratti intelligenti per ricreare i servizi finanziari tradizionali senza banche o broker:
+
+- **Protocolli di prestito** : prestare automaticamente criptovaluta e calcola l'interesse in tempo reale.
+- **Scambi decentralizzati** : scambiare token direttamente con altri senza uno scambio centralizzato.
+- **Stablecoin** : Mantenere valori di criptovaluta stabili attraverso algoritmi per contratti intelligenti.
+- **Agricoltura di rendimento** : ottimizzare automaticamente i rendimenti su più piattaforme.
+
+### Token non fungibili (NFT)
+
+I contratti intelligenti alimentano la creazione, la proprietà e il trading di risorse digitali uniche:
+
+- Dimostra la proprietà di arte digitale, oggetti da collezione o oggetti virtuali
+- Paga automaticamente le royalties ai creatori sulle vendite secondarie
+- Consente la proprietà frazionaria di attività di alto valore
+
+### Gestione della supply chain
+
+Tracciare le merci mentre si muovono attraverso catene di approvvigionamento complesse:
+
+- Registrare automaticamente ogni passaggio del percorso di un prodotto
+- Verificare l'autenticità e prevenire le contraffazioni
+- Attivare automaticamente i pagamenti
+
+### Organizzazioni Autonome Decentralizzate (DAO)
+
+Organizzazioni governate interamente da smart contract:
+
+- I membri votano le proposte utilizzando i token
+- Le proposte approvate vengono eseguite automaticamente
+- I fondi del Tesoro sono gestiti in modo trasparente per codice
+
+### Giochi e mondi virtuali
+
+Abilita la vera proprietà e l'interoperabilità degli elementi digitali:
+
+- I giocatori possiedono veramente i loro oggetti di gioco come gettoni
+- Gli oggetti possono essere scambiati o utilizzati in diversi giochi
+- Le economie di gioco funzionano con contratti intelligenti trasparenti e automatizzati
+
+### Assicurazione
+
+Automatizza l'elaborazione dei reclami e i pagamenti:
+
+- Assicurazione parametrica che paga automaticamente in base ai dati (ad esempio, i dati meteo per l'assicurazione delle colture)
+- Nessun operatore di reclami necessari per i casi semplici
+- Pagamenti più veloci con spese generali più basse
+
+## Esempio: Token Swap
+
+**Scenario** : Alice ha 100 AVAX e vuole scambiarlo per i 2.000 USDC di Bob. Nessuna delle due parti si fida dell'altra.
+
+**Soluzione tradizionale** : utilizzare uno scambio centralizzato per facilitare il commercio. Entrambe le parti devono fidarsi dello scambio per gestire i loro fondi onestamente e non congelare i conti.
+
+**Soluzione Smart Contract** :
+
+``` solidity
+contract TokenSwap {
+    address public alice;
+    address public bob;
+    uint256 public avaxAmount;
+    uint256 public usdcAmount;
+    bool public aliceDeposited;
+    bool public bobDeposited;
+    uint256 public deadline;
+    
+    IERC20 public usdcToken;
+    
+    // Alice creates the swap offer
+    constructor(address _bob, uint256 _usdcAmount, address _usdcToken) payable {
+        alice = msg.sender;
+        bob = _bob;
+        avaxAmount = msg.value;  // Alice deposits AVAX
+        usdcAmount = _usdcAmount;
+        usdcToken = IERC20(_usdcToken);
+        aliceDeposited = true;
+        deadline = block.timestamp + 1 hours;  // 1 hour to complete
+    }
+    
+    // Bob deposits his USDC to complete the swap
+    function depositUSDC() public {
+        require(msg.sender == bob, "Only Bob can deposit");
+        require(block.timestamp < deadline, "Swap expired");
+        
+        usdcToken.transferFrom(bob, address(this), usdcAmount);
+        bobDeposited = true;
+        
+        // Automatically execute the swap
+        executeSwap();
+    }
+    
+    // Execute the swap once both have deposited
+    function executeSwap() private {
+        require(aliceDeposited && bobDeposited, "Both must deposit");
+        
+        // Send AVAX to Bob
+        payable(bob).transfer(avaxAmount);
+        
+        // Send USDC to Alice
+        usdcToken.transfer(alice, usdcAmount);
+    }
+    
+    // If Bob doesn't deposit before deadline, Alice gets her AVAX back
+    function refund() public {
+        require(block.timestamp >= deadline, "Deadline not reached");
+        require(!bobDeposited, "Swap already completed");
+        
+        payable(alice).transfer(avaxAmount);
+    }
+}
+```
+
+**Come Funziona** :
+
+1. Alice crea il contratto di swap, specificando l'indirizzo di Bob e la quantità di USDC che vuole
+2. Alice invia 100 AVAX al contratto quando lo crea
+3. Bob ha 1 ora per depositare 2.000 USDC nel contratto
+4. **Se Bob deposita** : Il contratto scambia automaticamente—Bob ottiene l'AVAX, Alice ottiene l'USDC
+5. **Se Bob non deposita** : dopo la scadenza, Alice può chiamare `refund()`per riavere il suo AVAX
+
+Questo è veramente senza fiducia! Né Alice né Bob possono imbrogliare perché:
+
+- Alice non può riprendersi il suo AVAX una volta che Bob deposita (lo swap viene eseguito automaticamente)
+- Bob non può prendere l'AVAX senza depositare il suo USDC
+- Se Bob non partecipa, Alice riave indietro i suoi fondi
+- Nessun scambio centralizzato può congelare, confiscare o abusare dei fondi, sono solo messi su un contratto che non può fare altro che eseguire lo swap con loro.
+- Lo scambio è atomico: o entrambe le parti si verificano, o non accade
