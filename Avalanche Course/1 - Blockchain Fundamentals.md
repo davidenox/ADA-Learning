@@ -585,7 +585,7 @@ I contratti intelligenti sono distribuiti su piattaforme blockchain che supporta
 - **Immutabile**: Dopo la distribuzione, il codice del contratto non può essere modificato. Questo assicura che le regole non possono essere alterate dopo che le persone iniziano a usarlo.
 - **Trustless** : Gli utenti non hanno bisogno di fidarsi del creatore del contratto o di terze parti: devono solo fidarsi del fatto che il codice fa quello che dice (che possono verificare) e che la blockchain lo eseguirà correttamente.
 
-## Applicazioni del mondo realeù
+## Applicazioni del mondo reale
 
 I contratti intelligenti consentono un vasto ecosistema di applicazioni decentralizzate (dApp) in molti domini:
 
@@ -717,3 +717,54 @@ Questo è veramente senza fiducia! Né Alice né Bob possono imbrogliare perché
 - Se Bob non partecipa, Alice riave indietro i suoi fondi
 - Nessun scambio centralizzato può congelare, confiscare o abusare dei fondi, sono solo messi su un contratto che non può fare altro che eseguire lo swap con loro.
 - Lo scambio è atomico: o entrambe le parti si verificano, o non accade
+
+## Sfide e limitazioni
+
+Sebbene potenti, gli smart contract devono affrontare diverse sfide.
+### Vulnerabilità di sicurezza
+
+**Il problema**: i bug nel codice degli smart contract possono essere sfruttati. Poiché i contratti sono immutabili, i bug non possono essere corretti dopo l'implementazione.
+
+*Esempio famoso*: l'hacking di DAO nel 2016 ha portato al furto di 50 milioni di dollari a causa di una vulnerabilità di rientranza.
+
+**Soluzione**: test rigorosi, audit professionali, verifiche formali e modelli di codifica sicuri.
+
+### Problema Oracoli
+
+**Il problema**: gli smart contract non possono accedere autonomamente a dati esterni (meteo, quotazioni di borsa, risultati sportivi). Hanno bisogno di “oracoli” che forniscano loro informazioni sul mondo reale.
+
+*Sfida*: gli oracoli reintroducono nel sistema la fiducia e potenziali punti di fallimento.
+
+**Soluzione**: reti Oracle decentralizzate che aggregano dati provenienti da più fonti.
+
+### Incertezza giuridica
+
+**Il problema**: lo status giuridico degli smart contract non è chiaro in molte giurisdizioni. Cosa succede quando il codice è in conflitto con la legge?
+
+*Sfida*: la risoluzione delle controversie e la responsabilità non sono sempre chiare.
+
+**Evoluzione**: i quadri giuridici si stanno gradualmente adattando per riconoscere gli smart contract.
+
+### Immutabilità: un'arma a doppio taglio
+
+**Vantaggio**: nessuno può modificare le regole
+
+*Rischio*: impossibilità di correggere bug o aggiornare le funzionalità.
+
+**Soluzioni**: modelli di contratto aggiornabili o progettazione di percorsi di migrazione verso nuovi contratti.
+
+## Il futuro degli smart contract
+
+Gli smart contract sono ancora in evoluzione, con sviluppi entusiasmanti all'orizzonte:
+
+ - Nuovi linguaggi: consentono una logica più complessa e una programmazione più sicura.
+ - Contratti cross-chain: contratti che operano su più blockchain.
+ - Verifica formale: prove matematiche che dimostrano il corretto funzionamento dei contratti. 
+ - Contratti che preservano la privacy: utilizzo di prove a conoscenza zero per eseguire i contratti in modo privato.
+
+>[!important] Gli smart contract rappresentano un cambiamento fondamentale nel modo in cui creiamo e applichiamo gli accordi. Eliminando gli intermediari e automatizzando l'esecuzione, consentono nuove forme di fiducia, coordinamento e attività economica che prima erano impossibili. 
+
+Con la maturazione della tecnologia, gli smart contract sono destinati a ridefinire settori che vanno dalla finanza alla governance all'intrattenimento, creando un'economia digitale più automatizzata, trasparente e accessibile.
+
+# Token nativi
+
