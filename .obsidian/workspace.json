@@ -162,7 +162,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "b69bffa3518a8cfc",
@@ -197,11 +197,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "dedc6686139faceb",
+  "active": "15067aa38e7d7854",
   "lastOpenFiles": [
-    "Workshop/8nov25/Avalanche Workshop 1.pdf",
+    "Workshop/15nov25/Modern Cryptocurrency.pdf",
+    "Workshop/15nov25/L1 Avalanche.pdf",
     "Avalanche Course/1 - Blockchain Fundamentals.md",
+    "Workshop/15nov25",
     "Avalanche Course/Indice.md",
+    "Workshop/8nov25/Avalanche Workshop 1.pdf",
     "Workshop/8nov25/Workshop 1.md",
     "Workshop/8nov25",
     "Workshop",
