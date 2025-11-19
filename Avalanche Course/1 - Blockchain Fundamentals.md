@@ -766,6 +766,23 @@ Gli smart contract sono ancora in evoluzione, con sviluppi entusiasmanti all'ori
 
 Con la maturazione della tecnologia, gli smart contract sono destinati a ridefinire settori che vanno dalla finanza alla governance all'intrattenimento, creando un'economia digitale più automatizzata, trasparente e accessibile.
 
-# Token nativi
+# Token
+
+## Token Nativi
+
+Un **token nativo** è la valuta digitale primaria o la criptovaluta nativa di una determinata blockchain. I token nativi agiscono come base per il trasferimento di valore ed il funzionamento della rete all'interno dei rispettivi ambienti.
+
+- **Ethereum**: ETH;
+- **Avalanche C-Chain**: AVAX;
+- **Dexalot**: ALOT:
+- ...
+
+I token nativi svolgono più ruoli chiave allinterno delle reti blockchain basate su EVM, come:
+
+- **Trasferimento di valore**: I token nativi agiscono come valuta primaria per le transazioni P2P all'interno della rete, consentendo lo scambio di valuta tra i partecipanti;
+- **Commissioni**: I token nativi vengono usati come "carburante" per pagare le commissioni di transazione, le implementazioni dei contratti ed altre operazioni di rete. Ciò garantisce che le risorse siano allocate in modo efficiente all'interno della rete;
+- **Sicurezza**:
+---- 
+
 
 
